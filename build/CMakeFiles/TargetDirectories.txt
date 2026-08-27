@@ -1,0 +1,6 @@
+C:/dev/Grafikk-Programmering/build/CMakeFiles/GrafikkProgrammering.dir
+C:/dev/Grafikk-Programmering/build/CMakeFiles/ALL_BUILD.dir
+C:/dev/Grafikk-Programmering/build/CMakeFiles/ZERO_CHECK.dir
+C:/dev/Grafikk-Programmering/build/external/glfw/CMakeFiles/ALL_BUILD.dir
+C:/dev/Grafikk-Programmering/build/external/glfw/src/CMakeFiles/glfw.dir
+C:/dev/Grafikk-Programmering/build/external/glfw/src/CMakeFiles/update_mappings.dir
