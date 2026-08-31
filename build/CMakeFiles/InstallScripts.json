@@ -3,7 +3,8 @@
 	[
 		"C:/dev/Grafikk-Programmering/build/cmake_install.cmake",
 		"C:/dev/Grafikk-Programmering/build/external/glfw/cmake_install.cmake",
-		"C:/dev/Grafikk-Programmering/build/external/glfw/src/cmake_install.cmake"
+		"C:/dev/Grafikk-Programmering/build/external/glfw/src/cmake_install.cmake",
+		"C:/dev/Grafikk-Programmering/build/framework/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

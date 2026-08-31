@@ -16,19 +16,21 @@ set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(external/glfw)
 
+add_library(glad
+    external/glad/src/gl.c
+)
+
+target_include_directories(glad
+    PUBLIC
+        external/glad/include
+)
+add_subdirectory(framework)
+
 add_executable(GrafikkProgrammering 
 	src/main.cpp
-    external/glad/src/gl.c
 )
 
 target_link_libraries(GrafikkProgrammering
     PRIVATE
-        OpenGL::GL
-        glfw
-        
-)
-
-target_include_directories(GrafikkProgrammering
-    PRIVATE
-        external/glad/include
+        framework
 )

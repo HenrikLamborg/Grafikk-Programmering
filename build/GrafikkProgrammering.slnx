@@ -9,12 +9,24 @@
 	</Configurations>
 	<Project Path="GrafikkProgrammering.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="0eabb95f-afc9-3b2e-a952-d78d53bc000b">
 		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="framework/framework.vcxproj"/>
+		<BuildDependency Project="glad.vcxproj"/>
 		<BuildDependency Project="external/glfw/src/glfw.vcxproj"/>
+	</Project>
+	<Project Path="framework/framework.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="181d2b93-1173-38f6-8401-71799004afcf">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+		<BuildDependency Project="glad.vcxproj"/>
+		<BuildDependency Project="external/glfw/src/glfw.vcxproj"/>
+	</Project>
+	<Project Path="glad.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="bb6afb20-606d-3a14-85a7-3a077cd8d7eb">
+		<BuildDependency Project="ZERO_CHECK.vcxproj"/>
 	</Project>
 	<Folder Name="/CMakePredefinedTargets/">
 		<Project Path="ALL_BUILD.vcxproj" Type="8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942" Id="59750d23-8afb-3540-a6a0-0d873d218d83" DefaultStartup="true">
 			<BuildDependency Project="GrafikkProgrammering.vcxproj"/>
 			<BuildDependency Project="ZERO_CHECK.vcxproj"/>
+			<BuildDependency Project="framework/framework.vcxproj"/>
+			<BuildDependency Project="glad.vcxproj"/>
 			<BuildDependency Project="external/glfw/src/glfw.vcxproj"/>
 			<Build Solution="Debug|*" Project="false"/>
 			<Build Solution="Release|*" Project="false"/>
