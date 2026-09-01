@@ -2,6 +2,8 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include "GLFWApplication.h"
+#include "Shader.h"
+#include "shaders/triangle.h"
 
 
 class MyApplication : public GLFWApplication {
@@ -10,10 +12,22 @@ public:
 	{
 	}
 
-	unsigned Run() const override {
-		while (!glfwWindowShouldClose(mWindow)) {
+	unsigned Run() const override 
+	{
+		Shader shader
+		(
+			triangleVertexShaderSrc,
+			triangleFragmentShaderSrc
+		);
+		
+		while (!glfwWindowShouldClose(mWindow)) 
+		{
 			glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			shader.Bind();
+
+			shader.Unbind();
 
 			glfwSwapBuffers(mWindow);
 			glfwPollEvents();
