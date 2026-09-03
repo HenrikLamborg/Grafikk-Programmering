@@ -5,6 +5,8 @@ add_library(framework
 	Shader/Shader.h
 	Render/VertexBuffer.cpp
 	Render/VertexBuffer.h
+	Render/VertexArray.cpp
+	Render/VertexArray.h
 )
 
 target_include_directories(framework
