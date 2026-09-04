@@ -9,6 +9,7 @@ add_library(framework
 	Render/VertexArray.h
 	Render/IndexBuffer.cpp
 	Render/IndexBuffer.h
+	GeometricTools/GeometricTools.h
 )
 
 target_include_directories(framework
@@ -16,6 +17,7 @@ target_include_directories(framework
 		${CMAKE_CURRENT_SOURCE_DIR}/GLFWApplication
 		${CMAKE_CURRENT_SOURCE_DIR}/Shader
 		${CMAKE_CURRENT_SOURCE_DIR}/Render
+		${CMAKE_CURRENT_SOURCE_DIR}/GeometricTools
 )
 
 target_link_libraries(framework
