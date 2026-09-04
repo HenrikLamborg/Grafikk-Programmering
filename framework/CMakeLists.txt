@@ -3,12 +3,21 @@ add_library(framework
 	GLFWApplication/GLFWApplication.h
 	Shader/Shader.cpp
 	Shader/Shader.h
+	Render/VertexBuffer.cpp
+	Render/VertexBuffer.h
+	Render/VertexArray.cpp
+	Render/VertexArray.h
+	Render/IndexBuffer.cpp
+	Render/IndexBuffer.h
+	GeometricTools/GeometricTools.h
 )
 
 target_include_directories(framework
 	PUBLIC
 		${CMAKE_CURRENT_SOURCE_DIR}/GLFWApplication
 		${CMAKE_CURRENT_SOURCE_DIR}/Shader
+		${CMAKE_CURRENT_SOURCE_DIR}/Render
+		${CMAKE_CURRENT_SOURCE_DIR}/GeometricTools
 )
 
 target_link_libraries(framework
