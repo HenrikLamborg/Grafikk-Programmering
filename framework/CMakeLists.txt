@@ -7,6 +7,8 @@ add_library(framework
 	Render/VertexBuffer.h
 	Render/VertexArray.cpp
 	Render/VertexArray.h
+	Render/IndexBuffer.cpp
+	Render/IndexBuffer.h
 )
 
 target_include_directories(framework
