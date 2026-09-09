@@ -7,6 +7,7 @@
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "GeometricTools.h"
+#include "RenderCommands.h"
 
 
 class MyApplication : public GLFWApplication {
@@ -42,12 +43,12 @@ public:
 		
 		while (!glfwWindowShouldClose(mWindow)) 
 		{
-			glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommands::ClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+			RenderCommands::Clear();
 
 			shader.Bind();
 			triangleVAO.Bind();
-			glDrawArrays(GL_TRIANGLES, 0, 3);
+			RenderCommands::Draw(GL_TRIANGLES, 0, 3);
 			triangleVAO.Unbind();
 			shader.Unbind();
 

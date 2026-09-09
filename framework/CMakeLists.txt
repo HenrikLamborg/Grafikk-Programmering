@@ -9,6 +9,7 @@ add_library(framework
 	Render/VertexArray.h
 	Render/IndexBuffer.cpp
 	Render/IndexBuffer.h
+	Render/RenderCommands.h
 	GeometricTools/GeometricTools.h
 )
 
