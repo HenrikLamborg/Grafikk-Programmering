@@ -3,11 +3,12 @@
 #include <GLFW/glfw3.h>
 #include "GLFWApplication.h"
 #include "Shader.h"
-#include "shaders/triangle.h"
+#include "shaders/square.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "GeometricTools.h"
 #include "RenderCommands.h"
+#include "IndexBuffer.h"
 
 
 class MyApplication : public GLFWApplication {
@@ -20,25 +21,34 @@ public:
 	{
 
 		// VBO
-		auto triangleVBO = VertexBuffer(GeometricTools::Triangle2D.data(), sizeof(GeometricTools::Triangle2D));
+		auto squareVBO = VertexBuffer(GeometricTools::Square2D.data(), sizeof(GeometricTools::Square2D));
 
 		// VAO
-		auto triangleVAO = VertexArray();
-		triangleVAO.Bind();
-		triangleVAO.SetVertexAttribute(
+		auto squareVAO = VertexArray();
+		squareVAO.Bind();
+		squareVAO.SetVertexAttribute(
 			0,
 			2,
 			GL_FLOAT,
 			false,
-			2 * sizeof(float),
+			5 * sizeof(float),
 			nullptr
+		);
+
+		squareVAO.SetVertexAttribute(
+			1,
+			3,
+			GL_FLOAT,
+			false,
+			5 * sizeof(float),
+			reinterpret_cast<const void*>(2 * sizeof(float))
 		);
 
 		// shader
 		Shader shader
 		(
-			triangleVertexShaderSrc,
-			triangleFragmentShaderSrc
+			squareVertexShaderSrc,
+			squareFragmentShaderSrc
 		);
 		
 		while (!glfwWindowShouldClose(mWindow)) 
@@ -47,9 +57,9 @@ public:
 			RenderCommands::Clear();
 
 			shader.Bind();
-			triangleVAO.Bind();
-			RenderCommands::Draw(GL_TRIANGLES, 0, 3);
-			triangleVAO.Unbind();
+			squareVAO.Bind();
+			RenderCommands::Draw(GL_TRIANGLES, 0, 6);
+			squareVAO.Unbind();
 			shader.Unbind();
 
 			glfwSwapBuffers(mWindow);
