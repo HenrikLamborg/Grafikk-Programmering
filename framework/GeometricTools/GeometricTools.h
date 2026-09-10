@@ -9,4 +9,15 @@ namespace GeometricTools {
 		 0.5f, -0.5f,
 		 0.0f,  0.5f
 	};
+
+	// 2D Square with vertex color (rgb)
+	constexpr std::array<float, 6 * 5> Square2D = {
+		-0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
+		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+		 0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+
+		 0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+		-0.5f,  0.5f, 0.0f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
+	};
 }
