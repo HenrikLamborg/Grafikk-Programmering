@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glad/gl.h>
+#include "VertexBufferLayout.h"
 
 class VertexArray
 {
@@ -20,6 +21,8 @@ public:
 		GLsizei stride,
 		const void* pointer
 	) const;
+
+	void SetLayout(const VertexBufferLayout& layout);
 private:
 	GLuint mArrayID;
 };
