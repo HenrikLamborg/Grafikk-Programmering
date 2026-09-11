@@ -10,7 +10,10 @@ add_library(framework
 	Render/IndexBuffer.cpp
 	Render/IndexBuffer.h
 	Render/RenderCommands.h
+	Render/VertexBufferLayout.h
+	Render/VertexBufferLayout.cpp
 	GeometricTools/GeometricTools.h
+
 )
 
 target_include_directories(framework

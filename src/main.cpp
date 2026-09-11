@@ -8,7 +8,6 @@
 #include "VertexBuffer.h"
 #include "GeometricTools.h"
 #include "RenderCommands.h"
-#include "IndexBuffer.h"
 
 
 class MyApplication : public GLFWApplication {
@@ -23,26 +22,15 @@ public:
 		// VBO
 		auto squareVBO = VertexBuffer(GeometricTools::Square2D.data(), sizeof(GeometricTools::Square2D));
 
+		// VBL (Layout)
+		VertexBufferLayout layout;
+		layout.Push(GL_FLOAT, 2, false); // (x, y)
+		layout.Push(GL_FLOAT, 3, false); // (r, g, b)
+
 		// VAO
 		auto squareVAO = VertexArray();
 		squareVAO.Bind();
-		squareVAO.SetVertexAttribute(
-			0,
-			2,
-			GL_FLOAT,
-			false,
-			5 * sizeof(float),
-			nullptr
-		);
-
-		squareVAO.SetVertexAttribute(
-			1,
-			3,
-			GL_FLOAT,
-			false,
-			5 * sizeof(float),
-			reinterpret_cast<const void*>(2 * sizeof(float))
-		);
+		squareVAO.SetLayout(layout);
 
 		// shader
 		Shader shader
