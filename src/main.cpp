@@ -8,6 +8,7 @@
 #include "VertexBuffer.h"
 #include "GeometricTools.h"
 #include "RenderCommands.h"
+#include "IndexBuffer.h"
 
 
 class MyApplication : public GLFWApplication {
@@ -20,7 +21,7 @@ public:
 	{
 
 		// VBO
-		auto squareVBO = VertexBuffer(GeometricTools::Square2D.data(), sizeof(GeometricTools::Square2D));
+		auto squareVBO = VertexBuffer(GeometricTools::Square2DIndexed.data(), sizeof(GeometricTools::Square2DIndexed));
 
 		// VBL (Layout)
 		VertexBufferLayout layout;
@@ -31,6 +32,9 @@ public:
 		auto squareVAO = VertexArray();
 		squareVAO.Bind();
 		squareVAO.SetLayout(layout);
+
+		// EBO
+		auto squareEBO = IndexBuffer(GeometricTools::Square2DIndices.data(), sizeof(GeometricTools::Square2DIndices));
 
 		// shader
 		Shader shader
@@ -46,7 +50,7 @@ public:
 
 			shader.Bind();
 			squareVAO.Bind();
-			RenderCommands::Draw(GL_TRIANGLES, 0, 6);
+			RenderCommands::DrawIndexed(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 			squareVAO.Unbind();
 			shader.Unbind();
 
