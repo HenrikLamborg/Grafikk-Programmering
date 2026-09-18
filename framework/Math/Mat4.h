@@ -13,18 +13,27 @@ struct Mat4 {
 
 	std::array<float, 4 * 4> matrix;
 
+    float& At(int row, int column) {
+        return matrix[column * 4 + row];
+    }
+
+    float At(int row, int column) const {
+        return matrix[column * 4 + row];
+    }
+
     Mat4 operator*(const Mat4& other) const {
         Mat4 result;
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int row = 0; row < 4; row++) {
+            for (int column = 0; column < 4; column++) {
                 for (int k = 0; k < 4; k++) {
-                    result.matrix[i * 4 + j] +=
-                        matrix[i * 4 + k] * other.matrix[k * 4 + j];
+                    result.At(row, column) +=
+                        At(row, k) * other.At(k, column);
                 }
             }
         }
 
         return result;
     }
+
 };
