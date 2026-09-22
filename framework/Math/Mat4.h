@@ -65,4 +65,22 @@ struct Mat4 {
         return result;
     }
 
+    static Mat4 RotationY(float angle)
+    {
+        Mat4 result;
+
+        float cosAngle = std::cos(angle);
+        float sinAngle = std::sin(angle);
+
+        result.At(0, 0) = cosAngle;
+        result.At(0, 2) = sinAngle;
+
+        result.At(1, 1) = 1.0f;
+
+        result.At(2, 0) = -sinAngle;
+        result.At(2, 2) = cosAngle;
+
+        return result;
+    }
+
 };

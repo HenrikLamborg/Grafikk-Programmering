@@ -62,9 +62,16 @@ public:
 			RenderCommands::ClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 			RenderCommands::Clear();
 
+			float time = static_cast<float>(glfwGetTime());
+
+			// Cube rotation
+			float angle = time;
+			Mat4 model = Mat4::RotationY(angle);
+
 			shader.Bind();
 			shader.SetUniformMat4("view", view);
 			shader.SetUniformMat4("projection", projection);
+			shader.SetUniformMat4("model", model);
 			cubeVAO.Bind();
 			RenderCommands::DrawIndexed(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 			cubeVAO.Unbind();
