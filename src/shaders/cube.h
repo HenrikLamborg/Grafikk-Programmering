@@ -2,7 +2,7 @@
 
 #include <string>
 
-static const std::string squareVertexShaderSrc = R"(
+static const std::string cubeVertexShaderSrc = R"(
 #version 330 core
 
 layout(location = 0) in vec3 aPos;
@@ -19,7 +19,7 @@ void main()
 }
 )";
 
-static const std::string squareFragmentShaderSrc = R"(
+static const std::string cubeFragmentShaderSrc = R"(
 #version 330 core
 
 in vec3 vColor;

@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 Camera::Camera(){
-	mPos = Vec3{ 0.0f, 0.0f, 3.0f };
+	mPos = Vec3{ 2.0f, 1.0f, 3.0f }; // Camera position
 	mTarget = Vec3{ 0.0f, 0.0f, 0.0f };
 }
 
@@ -40,21 +40,21 @@ Mat4 Camera::GetViewMatrix() const
     view.At(0, 0) = right.x;
     view.At(1, 0) = right.y;
     view.At(2, 0) = right.z;
-    view.At(3, 0) = -right.Dot(mPos);
+    view.At(3, 0) = 0.0f;
 
     view.At(0, 1) = up.x;
     view.At(1, 1) = up.y;
     view.At(2, 1) = up.z;
-    view.At(3, 1) = -up.Dot(mPos);
+    view.At(3, 1) = 0.0f;
 
     view.At(0, 2) = -forward.x;
     view.At(1, 2) = -forward.y;
     view.At(2, 2) = -forward.z;
-    view.At(3, 2) = forward.Dot(mPos);
+    view.At(3, 2) = 0.0f;
 
-    view.At(0, 3) = 0.0f;
-    view.At(1, 3) = 0.0f;
-    view.At(2, 3) = 0.0f;
+    view.At(0, 3) = -right.Dot(mPos);
+    view.At(1, 3) = -up.Dot(mPos);
+    view.At(2, 3) = forward.Dot(mPos);
     view.At(3, 3) = 1.0f;
 
     return view;

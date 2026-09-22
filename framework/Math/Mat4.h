@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <cmath>
 
 struct Mat4 {
 	Mat4() {
@@ -32,6 +33,34 @@ struct Mat4 {
                 }
             }
         }
+
+        return result;
+    }
+
+    static Mat4 Perspective(
+        float fovDegrees,
+        float aspect,
+        float nearPlane,
+        float farPlane
+    ) {
+        Mat4 result;
+
+        float fovRadians = fovDegrees * 3.14159265359f / 180.0f;
+        float tanHalfFov = std::tan(fovRadians / 2.0f);
+
+        result.At(0, 0) = 1.0f / (aspect * tanHalfFov);
+        result.At(1, 1) = 1.0f / tanHalfFov;
+
+        result.At(2, 2) =
+            -(farPlane + nearPlane) /
+            (farPlane - nearPlane);
+
+        result.At(2, 3) =
+            -(2.0f * farPlane * nearPlane) /
+            (farPlane - nearPlane);
+
+        result.At(3, 2) = -1.0f;
+        result.At(3, 3) = 0.0f;
 
         return result;
     }
