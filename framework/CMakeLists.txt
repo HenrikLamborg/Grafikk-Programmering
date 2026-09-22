@@ -13,7 +13,10 @@ add_library(framework
 	Render/VertexBufferLayout.h
 	Render/VertexBufferLayout.cpp
 	GeometricTools/GeometricTools.h
-
+	Camera/Camera.h
+	Camera/Camera.cpp
+	Math/Vec3.h
+	Math/Mat4.h
 )
 
 target_include_directories(framework
@@ -22,6 +25,8 @@ target_include_directories(framework
 		${CMAKE_CURRENT_SOURCE_DIR}/Shader
 		${CMAKE_CURRENT_SOURCE_DIR}/Render
 		${CMAKE_CURRENT_SOURCE_DIR}/GeometricTools
+		${CMAKE_CURRENT_SOURCE_DIR}/Camera
+		${CMAKE_CURRENT_SOURCE_DIR}/Math
 )
 
 target_link_libraries(framework

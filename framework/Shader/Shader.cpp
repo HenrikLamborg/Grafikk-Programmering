@@ -60,3 +60,15 @@ void Shader::Bind() const{
 void Shader::Unbind() const{
 	glUseProgram(0);
 }
+
+void Shader::SetUniformMat4(const std::string& name, const Mat4& matrix)
+{
+	GLint location = glGetUniformLocation(mShaderProgram, name.c_str());
+
+	glUniformMatrix4fv(
+		location,
+		1,
+		GL_FALSE,
+		matrix.matrix.data()
+	);
+}
