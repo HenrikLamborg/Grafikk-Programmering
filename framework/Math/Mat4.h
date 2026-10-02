@@ -24,6 +24,7 @@ struct Mat4 {
 
     Mat4 operator*(const Mat4& other) const {
         Mat4 result;
+        result.matrix.fill(0.0f);
 
         for (int row = 0; row < 4; row++) {
             for (int column = 0; column < 4; column++) {

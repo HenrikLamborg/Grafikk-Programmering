@@ -17,6 +17,8 @@ add_library(framework
 	Camera/Camera.cpp
 	Math/Vec3.h
 	Math/Mat4.h
+	Texture/Texture.h
+	Texture/Texture.cpp
 )
 
 target_include_directories(framework
@@ -27,10 +29,13 @@ target_include_directories(framework
 		${CMAKE_CURRENT_SOURCE_DIR}/GeometricTools
 		${CMAKE_CURRENT_SOURCE_DIR}/Camera
 		${CMAKE_CURRENT_SOURCE_DIR}/Math
+		${CMAKE_CURRENT_SOURCE_DIR}/Texture
+		${CMAKE_SOURCE_DIR}/external/stb
 )
 
 target_link_libraries(framework
     PUBLIC
         glfw
         glad
+		glm::glm
 )
