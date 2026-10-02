@@ -1,61 +1,101 @@
 #include "Camera.h"
 
 Camera::Camera(){
-	mPos = Vec3{ 2.0f, 1.0f, 3.0f }; // Camera position
-	mTarget = Vec3{ 0.0f, 0.0f, 0.0f };
+	mPosition = glm::vec3( 0.0f, 0.0f, 3.0f );
+	mFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	mUp = glm::vec3(0.0f, 1.0f, 0.0f);
+    mYaw = -90.0f;
+    mPitch = 0.0f;
+    mWorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+    mMovementSpeed = 2.0f;
+    mMouseSensitivity = 0.05f;
+    mZoom = 45.0f;
+
+    UpdateCameraVectors();
 }
 
-Vec3 Camera::GetDirection() const{
-	Vec3 direction = mTarget - mPos;
-	Vec3 normalized = direction.Normalize();
-	return normalized;
-}
-
-Vec3 Camera::GetRight() const {
-	Vec3 forward = GetDirection();
-	Vec3 worldUp = { 0.0f, 1.0f, 0.0f };
-
-	Vec3 right = forward.Cross(worldUp);
-
-	return right;
-}
-
-Vec3 Camera::GetUp() const {
-	Vec3 right = GetRight();
-	Vec3 forward = GetDirection();
-
-	Vec3 up = right.Cross(forward);
-
-	return up;
-}
-
-Mat4 Camera::GetViewMatrix() const
+glm::mat4 Camera::GetViewMatrix() const
 {
-    Vec3 forward = GetDirection();
-    Vec3 right = GetRight();
-    Vec3 up = GetUp();
+    return glm::lookAt(
+        mPosition,
+        mPosition + mFront,
+        mUp
+    );
+}
 
-    Mat4 view;
+float Camera::GetZoom() const
+{
+    return mZoom;
+}
 
-    view.At(0, 0) = right.x;
-    view.At(1, 0) = right.y;
-    view.At(2, 0) = right.z;
-    view.At(3, 0) = 0.0f;
+void Camera::MoveForward(float distance) {
+    mPosition += mFront * distance;
+}
 
-    view.At(0, 1) = up.x;
-    view.At(1, 1) = up.y;
-    view.At(2, 1) = up.z;
-    view.At(3, 1) = 0.0f;
+void Camera::MoveBackward(float distance) {
+    mPosition -= mFront * distance;
+}
 
-    view.At(0, 2) = -forward.x;
-    view.At(1, 2) = -forward.y;
-    view.At(2, 2) = -forward.z;
-    view.At(3, 2) = 0.0f;
+void Camera::MoveRight(float distance)
+{
+    mPosition += mRight * distance;
+}
 
-    view.At(0, 3) = -right.Dot(mPos);
-    view.At(1, 3) = -up.Dot(mPos);
-    view.At(2, 3) = forward.Dot(mPos);
-    view.At(3, 3) = 1.0f;
+void Camera::MoveLeft(float distance)
+{
+    mPosition -= mRight * distance;
+}
 
-    return view;
+void Camera::MoveUp(float distance)
+{
+    mPosition += mUp * distance;
+}
+
+void Camera::MoveDown(float distance)
+{
+    mPosition -= mUp * distance;
+}
+
+void Camera::ProcessMouseMovement(float xOffset, float yOffset)
+{
+    float sensitivity = 0.05f;
+
+    xOffset *= sensitivity;
+    yOffset *= sensitivity;
+
+    mYaw += xOffset;
+    mPitch += yOffset;
+
+    if (mPitch > 89.0f)
+        mPitch = 89.0f;
+
+    if (mPitch < -89.0f)
+        mPitch = -89.0f;
+
+    UpdateCameraVectors();
+}
+
+void Camera::UpdateCameraVectors(){
+    glm::vec3 front;
+
+    front.x = cos(glm::radians(mYaw)) * cos(glm::radians(mPitch));
+    front.y = sin(glm::radians(mPitch));
+    front.z = sin(glm::radians(mYaw)) * cos(glm::radians(mPitch));
+
+    mFront = glm::normalize(front);
+
+    mRight = glm::normalize(glm::cross(mFront, mWorldUp));
+
+    mUp = glm::normalize(glm::cross(mRight, mFront));
+}
+
+void Camera::ProcessMouseScroll(float yOffset)
+{
+    mZoom -= yOffset;
+
+    if (mZoom < 1.0f)
+        mZoom = 1.0f;
+
+    if (mZoom > 45.0f)
+        mZoom = 45.0f;
 }

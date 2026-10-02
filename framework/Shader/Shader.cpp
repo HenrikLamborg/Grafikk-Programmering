@@ -1,5 +1,6 @@
 #include "Shader.h"
 
+
 Shader::Shader(
 	const std::string& vertexSrc,
 	const std::string& fragmentSrc
@@ -61,7 +62,7 @@ void Shader::Unbind() const{
 	glUseProgram(0);
 }
 
-void Shader::SetUniformMat4(const std::string& name, const Mat4& matrix)
+void Shader::SetUniformMat4(const std::string& name, const glm::mat4& matrix)
 {
 	GLint location = glGetUniformLocation(mShaderProgram, name.c_str());
 
@@ -69,6 +70,13 @@ void Shader::SetUniformMat4(const std::string& name, const Mat4& matrix)
 		location,
 		1,
 		GL_FALSE,
-		matrix.matrix.data()
+		glm::value_ptr(matrix)
 	);
+}
+
+void Shader::SetUniform1i(const std::string& name, int value)
+{
+	GLint location = glGetUniformLocation(mShaderProgram, name.c_str());
+
+	glUniform1i(location, value);
 }

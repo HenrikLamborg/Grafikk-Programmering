@@ -15,6 +15,7 @@ set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(external/glfw)
+add_subdirectory(external/glm)
 
 add_library(glad
     external/glad/src/gl.c
@@ -30,7 +31,14 @@ add_executable(GrafikkProgrammering
 	src/main.cpp
 )
 
+add_custom_command(TARGET GrafikkProgrammering POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/assets
+        $<TARGET_FILE_DIR:GrafikkProgrammering>/assets
+)
+
 target_link_libraries(GrafikkProgrammering
     PRIVATE
         framework
+        glm::glm
 )
